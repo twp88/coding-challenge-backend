@@ -1,3 +1,5 @@
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/twp88/coding-challenge-backend.svg?columns=all)](https://waffle.io/twp88/coding-challenge-backend)
+
 # Badi Coding Challenge - Backend (Ruby on Rails)
 ![Zombies at Badi](https://user-images.githubusercontent.com/4199523/33260366-e54216aa-d35f-11e7-8442-8d9e1cd67d88.jpg)
 
@@ -8,12 +10,12 @@ You are a scientist in a post-apocalyptic world. In your lab you have plenty of 
 
 * Fork this repo and clone your fork in your local machine. Alternatively, if you prefer to keep your challenge private, just download the code of this repo and send the final result to jobs@badiapp.com.
 * The challenge is on! Implement the 6 steps described below;
-* Create a pull request. 
+* Create a pull request.
 
 ## What we expect
 * Build a performant, clean and well structured solution;
 * Commit **early and often**. We want to be able to check your progress;
-* Feel free to address the problem creatively according to your programming tastes (there are always multiple ways to achieve the same goal) and try to use elegant solutions. 
+* Feel free to address the problem creatively according to your programming tastes (there are always multiple ways to achieve the same goal) and try to use elegant solutions.
 
 ## The Challenge
 
@@ -44,7 +46,7 @@ docker-compose logs -f
 ```
 
 ### About Badi
-[Badi](https://www.crunchbase.com/organization/badi) is a startup based in Barcelona (Spain) which offers a two-sided marketplace for shared flats and roommates (mobile and web app). 
-Our goal is making city living affordable for everyone by unlocking available rooms inside crowded urban areas. How? By offering the best marketplace that intelligently matches verified profiles without intermediaries. 
+[Badi](https://www.crunchbase.com/organization/badi) is a startup based in Barcelona (Spain) which offers a two-sided marketplace for shared flats and roommates (mobile and web app).
+Our goal is making city living affordable for everyone by unlocking available rooms inside crowded urban areas. How? By offering the best marketplace that intelligently matches verified profiles without intermediaries.
 Do you want to join our tech team as a backend engineer? Accept our challenge and impress us :)
 In case of questions or doubts, don't hesitate to reach out to us at jobs@badiapp.com.
