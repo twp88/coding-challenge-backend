@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181025101225) do
+ActiveRecord::Schema.define(version: 20181025104120) do
 
   create_table "armories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "zombie_id"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20181025101225) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "wardrobes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.bigint "zombie_id"
+    t.bigint "armor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["armor_id"], name: "index_wardrobes_on_armor_id"
+    t.index ["zombie_id"], name: "index_wardrobes_on_zombie_id"
+  end
+
   create_table "weapons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "name"
     t.integer "attack_points"
@@ -37,15 +46,6 @@ ActiveRecord::Schema.define(version: 20181025101225) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "zombie_armors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
-    t.bigint "zombie_id"
-    t.bigint "armor_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["armor_id"], name: "index_zombie_armors_on_armor_id"
-    t.index ["zombie_id"], name: "index_zombie_armors_on_zombie_id"
   end
 
   create_table "zombies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
@@ -60,6 +60,6 @@ ActiveRecord::Schema.define(version: 20181025101225) do
 
   add_foreign_key "armories", "weapons"
   add_foreign_key "armories", "zombies"
-  add_foreign_key "zombie_armors", "armors"
-  add_foreign_key "zombie_armors", "zombies"
+  add_foreign_key "wardrobes", "armors"
+  add_foreign_key "wardrobes", "zombies"
 end
