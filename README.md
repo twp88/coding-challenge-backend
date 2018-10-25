@@ -1,3 +1,4 @@
+[ ![Codeship Status for twp88/coding-challenge-backend](https://app.codeship.com/projects/76a076b0-b9cd-0136-1477-5a7589b245e6/status?branch=master)](https://app.codeship.com/projects/312316)
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/twp88/coding-challenge-backend.svg?columns=all)](https://waffle.io/twp88/coding-challenge-backend)
 
 # Badi Coding Challenge - Backend (Ruby on Rails)
