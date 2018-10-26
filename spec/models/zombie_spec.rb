@@ -1,7 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Zombie, type: :model do
-  let(:zombie) { build(:zombie) }
+  let(:zombie) do
+    build(:zombie,
+          hit_points: hit_points,
+          brains_eaten: brains_eaten,
+          speed: speed)
+  end
+
+  let(:hit_points) { 10 }
+  let(:brains_eaten) { 5 }
+  let(:speed) { 7 }
   let(:default_hit_points) { 10 }
   let(:default_brains_eaten) { 5 }
   let(:default_speed) { 15 }
@@ -33,6 +42,24 @@ RSpec.describe Zombie, type: :model do
       zombie.save
 
       expect(zombie.speed).to eq(default_speed)
+    end
+
+    it 'ensures non default value for speed' do
+      zombie.save
+
+      expect(zombie.hit_points).to eq(hit_points)
+    end
+
+    it 'ensures non default value for speed' do
+      zombie.save
+
+      expect(zombie.brains_eaten).to eq(brains_eaten)
+    end
+
+    it 'ensures non default value for speed' do
+      zombie.save
+
+      expect(zombie.speed).to eq(speed)
     end
   end
 end
