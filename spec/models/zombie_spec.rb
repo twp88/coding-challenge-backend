@@ -18,6 +18,7 @@ RSpec.describe Zombie, type: :model do
   context 'validations tests' do
     it 'ensures the first name is present' do
       zombie.name = nil
+
       expect(zombie.save).to eq(false)
     end
   end
