@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :zombie do
-    name 'Kepler Laveran de Lima Ferreira'
+    name { Faker::HarryPotter.unique.character }
     hit_points 10
     brains_eaten 5
     speed 7
