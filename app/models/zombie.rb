@@ -5,6 +5,8 @@ class Zombie < ApplicationRecord
 
   has_many :armories
   has_many :weapons, through: :armories
+  has_many :wardrobes
+  has_many :armors, through: :wardrobes
 
   def set_defaults
     self.hit_points = 10 if hit_points.nil?
