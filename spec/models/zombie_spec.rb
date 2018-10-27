@@ -65,10 +65,15 @@ RSpec.describe Zombie, type: :model do
   end
 
   context 'relations tests' do
-    let!(:armory) { create(:armory, weapon_id: shot_gun.id, zombie_id: zombie.id) }
     let!(:shot_gun) { create(:weapon) }
 
     let(:zombie) { create(:zombie, id: 102) }
+
+    let!(:armory) do
+      create(:armory,
+             weapon_id: shot_gun.id,
+             zombie_id: zombie.id)
+    end
 
     it 'returns the zombies weapon' do
       expect(zombie.weapons.first.name).to eq('Shotgun')
