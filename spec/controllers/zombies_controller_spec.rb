@@ -24,7 +24,7 @@ RSpec.describe ZombiesController, type: :controller do
     it 'returns correct json' do
       get :show, params: { id: first_zombie.id }
 
-      expect(response.body).to eq([first_zombie].to_json)
+      expect(response.body).to eq(first_zombie.to_json)
     end
   end
 end
