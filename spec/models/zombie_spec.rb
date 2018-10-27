@@ -1,19 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Zombie, type: :model do
+  let(:brains_eaten) { 5 }
+  let(:default_hit_points) { 10 }
+  let(:default_brains_eaten) { 5 }
+  let(:default_speed) { 15 }
+  let(:hit_points) { 10 }
+  let(:speed) { 7 }
+
   let(:zombie) do
     build(:zombie,
           hit_points: hit_points,
           brains_eaten: brains_eaten,
           speed: speed)
   end
-
-  let(:hit_points) { 10 }
-  let(:brains_eaten) { 5 }
-  let(:speed) { 7 }
-  let(:default_hit_points) { 10 }
-  let(:default_brains_eaten) { 5 }
-  let(:default_speed) { 15 }
 
   context 'validations tests' do
     it 'ensures the first name is present' do
@@ -61,6 +61,22 @@ RSpec.describe Zombie, type: :model do
       zombie.save
 
       expect(zombie.speed).to eq(speed)
+    end
+  end
+
+  context 'relations tests' do
+    let!(:shot_gun) { create(:weapon) }
+
+    let(:zombie) { create(:zombie, id: 102) }
+
+    let!(:armory) do
+      create(:armory,
+             weapon_id: shot_gun.id,
+             zombie_id: zombie.id)
+    end
+
+    it 'returns the zombies weapon' do
+      expect(zombie.weapons.first.name).to eq('Shotgun')
     end
   end
 end

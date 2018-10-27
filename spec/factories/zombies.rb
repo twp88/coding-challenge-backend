@@ -5,13 +5,15 @@ FactoryBot.define do
     brains_eaten 5
     speed 7
     turn_date Time.now
+    id 1
   end
 
-  factory :random_zombie do
+  trait :random_zombie do
     name { Fake::Buffy.unique.character }
     hit_points 10
     brains_eaten 5
     speed 7
     turn_date Time.now
+    id 2
   end
 end
