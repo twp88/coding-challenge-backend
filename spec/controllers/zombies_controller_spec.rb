@@ -5,6 +5,10 @@ RSpec.describe ZombiesController, type: :controller do
   let!(:second_zombie) { create(:zombie) }
 
   let(:fake_id) { 100_000 }
+  let(:zombie_name) { Faker::HarryPotter.unique.character }
+  let(:brains_eaten) { 5 }
+  let(:hit_points) { 10 }
+  let(:speed) { 7 }
 
   describe '#index' do
     subject { get :index }
@@ -34,5 +38,16 @@ RSpec.describe ZombiesController, type: :controller do
 
       expect(response.code).to eq('404')
     end
+  end
+
+  describe '#create' do
+    subject do
+      get :create, params: { name: zombie_name,
+                             brains_eaten: brains_eaten,
+                             hit_points: hit_points,
+                             speed: speed }
+    end
+
+    it { is_expected.to be_successful }
   end
 end
