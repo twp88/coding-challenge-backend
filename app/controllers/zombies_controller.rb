@@ -22,6 +22,10 @@ class ZombiesController < ApplicationController
     @zombie = Zombie.create(zombie_params)
   end
 
+  def destroy
+    Zombie.find(params[:id]).destroy
+  end
+
   private
 
   def zombie_params

@@ -63,5 +63,11 @@ RSpec.describe ZombiesController, type: :controller do
     subject { delete :destroy, params: { id: first_zombie.id } }
 
     it { is_expected.to be_successful }
+
+    it 'reduces zombies number' do
+      expect { delete :destroy, params: { id: first_zombie.id } }
+        .to change(Zombie, :count)
+        .by(-1)
+    end
   end
 end
