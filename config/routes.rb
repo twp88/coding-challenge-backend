@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resources :zombies, only: [:index, :show, :create, :new]
+  resources :zombies
 end

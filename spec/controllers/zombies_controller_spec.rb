@@ -51,5 +51,17 @@ RSpec.describe ZombiesController, type: :controller do
         .to change(Zombie, :count)
         .by(1)
     end
+
+    it 'rejects bad request' do
+      post :create, params: { name: nil }
+
+      expect(response.code).to eq('400')
+    end
+  end
+
+  describe '#delete' do
+    subject { delete :destroy, params: { id: first_zombie.id } }
+
+    it { is_expected.to be_successful }
   end
 end
