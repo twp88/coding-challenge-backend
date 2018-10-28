@@ -13,4 +13,27 @@ class ZombiesController < ApplicationController
     @zombie = Zombie.find(params[:id])
     render json: @zombie
   end
+
+  def new
+    @zombie = Zombie.new
+  end
+
+  def create
+    @zombie = Zombie.create(zombie_params)
+  end
+
+  private
+
+  def zombie_params
+    params.permit(:id,
+                  :name,
+                  :brains_eaten,
+                  :speed,
+                  :hit_points,
+                  :turn_date,
+                  :weapons,
+                  :armors,
+                  :created_at,
+                  :updated_at)
+  end
 end

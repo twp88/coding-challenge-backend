@@ -9,6 +9,7 @@ RSpec.describe ZombiesController, type: :controller do
   let(:brains_eaten) { 5 }
   let(:hit_points) { 10 }
   let(:speed) { 7 }
+  let(:turn_date) { Time.now }
 
   describe '#index' do
     subject { get :index }
@@ -41,13 +42,14 @@ RSpec.describe ZombiesController, type: :controller do
   end
 
   describe '#create' do
-    subject do
-      get :create, params: { name: zombie_name,
-                             brains_eaten: brains_eaten,
-                             hit_points: hit_points,
-                             speed: speed }
-    end
+    subject { post :create, params: { name: zombie_name } }
 
     it { is_expected.to be_successful }
+
+    it 'creates new zombie' do
+      expect { post :create, params: { name: zombie_name } }
+        .to change(Zombie, :count)
+        .by(1)
+    end
   end
 end
