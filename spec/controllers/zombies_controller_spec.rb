@@ -61,7 +61,7 @@ RSpec.describe ZombiesController, type: :controller do
     it 'rejects bad request' do
       post :create, params: { name: nil }
 
-      expect(response.code).to eq('400')
+      expect(response.code).to eq('204')
     end
   end
 
@@ -75,9 +75,8 @@ RSpec.describe ZombiesController, type: :controller do
     end
 
     it 'rejects bad request' do
-      delete :destroy, params: { id: nil }
-
-      expect(response.code).to eq('400')
+      expect { delete :destroy, params: { id: nil } }
+        .to raise_error(ActionController::UrlGenerationError)
     end
   end
 
@@ -95,7 +94,7 @@ RSpec.describe ZombiesController, type: :controller do
     it 'rejects bad request' do
       subject { put :update, params: { id: nil, name: new_name } }
 
-      expect(response.code).to eq('400')
+      expect(response.code).to eq('204')
     end
   end
 end

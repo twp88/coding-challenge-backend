@@ -1,8 +1,6 @@
 class ZombiesController < ApplicationController
-
   rescue_from ActiveRecord::RecordNotFound do
-    logger.error "Woops! This zombie doesn't exist!"
-    render file: "#{Rails.root}/public/404.html", status: 404
+    zombie_missing_error
   end
 
   def index
@@ -46,5 +44,10 @@ class ZombiesController < ApplicationController
                   :armors,
                   :created_at,
                   :updated_at)
+  end
+
+  def zombie_missing_error
+    logger.error "Woops! This zombie doesn't exist!"
+    render file: "#{Rails.root}/public/404.html", status: 404
   end
 end
