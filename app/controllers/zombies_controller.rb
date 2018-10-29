@@ -22,6 +22,11 @@ class ZombiesController < ApplicationController
     @zombie = Zombie.create(zombie_params)
   end
 
+  def update
+    @zombie = Zombie.find(params[:id])
+    @zombie.update_attributes(zombie_params)
+  end
+
   def destroy
     Zombie.find(params[:id]).destroy
   end
