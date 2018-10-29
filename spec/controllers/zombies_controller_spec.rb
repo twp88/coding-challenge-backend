@@ -10,6 +10,7 @@ RSpec.describe ZombiesController, type: :controller do
   let(:hit_points) { 10 }
   let(:speed) { 7 }
   let(:turn_date) { Time.now }
+  let(:new_name) { 'Ralf' }
 
   describe '#index' do
     subject { get :index }
@@ -17,7 +18,7 @@ RSpec.describe ZombiesController, type: :controller do
     it { is_expected.to be_successful }
 
     it 'returns correct json' do
-      get :index
+      subject
 
       expect(response.body).to eq([first_zombie, second_zombie].to_json)
     end
@@ -29,7 +30,7 @@ RSpec.describe ZombiesController, type: :controller do
     it { is_expected.to be_successful }
 
     it 'returns correct json' do
-      get :show, params: { id: first_zombie.id }
+      subject
 
       expect(response.body).to eq(first_zombie.to_json)
     end
@@ -47,9 +48,7 @@ RSpec.describe ZombiesController, type: :controller do
     it { is_expected.to be_successful }
 
     it 'creates new zombie' do
-      expect { post :create, params: { name: zombie_name } }
-        .to change(Zombie, :count)
-        .by(1)
+      expect { subject }.to change(Zombie, :count).by(1)
     end
 
     it 'rejects bad request' do
@@ -65,9 +64,13 @@ RSpec.describe ZombiesController, type: :controller do
     it { is_expected.to be_successful }
 
     it 'reduces zombies number' do
-      expect { delete :destroy, params: { id: first_zombie.id } }
-        .to change(Zombie, :count)
-        .by(-1)
+      expect { subject }.to change(Zombie, :count).by(-1)
     end
+  end
+
+  describe '#update' do
+    subject { put :update, params: { id: first_zombie.id, name: new_name } }
+
+    it { is_expected.to be_successful }
   end
 end
