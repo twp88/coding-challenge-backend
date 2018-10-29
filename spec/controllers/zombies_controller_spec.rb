@@ -11,6 +11,7 @@ RSpec.describe ZombiesController, type: :controller do
   let(:speed) { 7 }
   let(:turn_date) { Time.now }
   let(:new_name) { 'Ralf' }
+  let(:create_message) { "#{zombie_name} has been successfully spawned" }
 
   describe '#index' do
     subject { get :index }
@@ -51,6 +52,12 @@ RSpec.describe ZombiesController, type: :controller do
       expect { subject }.to change(Zombie, :count).by(1)
     end
 
+    it 'returns correct json' do
+      subject
+
+      expect(response.body).to eq(create_message.to_json)
+    end
+
     it 'rejects bad request' do
       post :create, params: { name: nil }
 
@@ -66,6 +73,12 @@ RSpec.describe ZombiesController, type: :controller do
     it 'reduces zombies number' do
       expect { subject }.to change(Zombie, :count).by(-1)
     end
+
+    it 'rejects bad request' do
+      delete :destroy, params: { id: nil }
+
+      expect(response.code).to eq('400')
+    end
   end
 
   describe '#update' do
@@ -77,6 +90,12 @@ RSpec.describe ZombiesController, type: :controller do
       subject
 
       expect(Zombie.first.name).to eq(new_name)
+    end
+
+    it 'rejects bad request' do
+      subject { put :update, params: { id: nil, name: new_name } }
+
+      expect(response.code).to eq('400')
     end
   end
 end
