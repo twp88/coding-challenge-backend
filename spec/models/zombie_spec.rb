@@ -65,6 +65,8 @@ RSpec.describe Zombie, type: :model do
   end
 
   context 'relations tests' do
+    subject { create(:zombie) }
+
     let!(:shot_gun) { create(:weapon) }
 
     let(:zombie) { create(:zombie, id: 102) }
@@ -74,6 +76,8 @@ RSpec.describe Zombie, type: :model do
              weapon_id: shot_gun.id,
              zombie_id: zombie.id)
     end
+
+    it { should have_many(:weapons) }
 
     it 'returns the zombies weapon' do
       expect(zombie.weapons.first.name).to eq('Shotgun')
