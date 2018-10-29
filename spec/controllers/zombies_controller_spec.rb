@@ -72,5 +72,11 @@ RSpec.describe ZombiesController, type: :controller do
     subject { put :update, params: { id: first_zombie.id, name: new_name } }
 
     it { is_expected.to be_successful }
+
+    it 'updates the correct zombie' do
+      subject
+
+      expect(Zombie.first.name).to eq(new_name)
+    end
   end
 end
