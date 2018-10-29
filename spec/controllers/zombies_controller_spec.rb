@@ -55,7 +55,7 @@ RSpec.describe ZombiesController, type: :controller do
     it 'returns correct json' do
       subject
 
-      expect(response.body).to eq(create_message.to_json)
+      expect(response.body).to eq(create_message)
     end
 
     it 'rejects bad request' do

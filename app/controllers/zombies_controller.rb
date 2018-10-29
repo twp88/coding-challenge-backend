@@ -21,6 +21,7 @@ class ZombiesController < ApplicationController
 
   def create
     @zombie = Zombie.create(zombie_params)
+    render json: "#{@zombie.name} has been successfully spawned"
   end
 
   def update
