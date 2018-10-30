@@ -1,4 +1,9 @@
+require 'elasticsearch/model'
+
 class Zombie < ApplicationRecord
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   before_save :set_defaults
 
   validates :name, presence: true
@@ -14,3 +19,5 @@ class Zombie < ApplicationRecord
     self.speed = 15 if speed.nil?
   end
 end
+
+# Zombie.import
