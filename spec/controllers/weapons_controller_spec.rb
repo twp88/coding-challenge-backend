@@ -5,7 +5,7 @@ RSpec.describe WeaponsController, type: :controller do
   let!(:shotgun) { create(:weapon) }
 
   describe '#index' do
-    subject { :index }
+    subject { get :index }
 
     it { is_expected.to be_successful }
 
