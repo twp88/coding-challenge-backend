@@ -11,7 +11,7 @@ test:
       timeout: 5
 
 production:
-  host: "ENV['SEARCHBOX_URL']"
+  host: ENV['SEARCHBOX_SSL_URL']
   transport_options:
     request:
       timeout: 5
