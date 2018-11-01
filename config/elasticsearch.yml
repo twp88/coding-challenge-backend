@@ -11,7 +11,7 @@ test:
       timeout: 5
 
 production:
-  host: SEARCHBOX_URL
+  host: http://paas:e19c2e0f69188e15fc17f4a1b540e8bb@gloin-eu-west-1.searchly.com
   transport_options:
     request:
       timeout: 5
