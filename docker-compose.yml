@@ -11,10 +11,13 @@ services:
       API_DB_NAME: coding-challenge-api
       API_DB_TEST_NAME: coding-challenge-api-test
       API_DB_PASSWORD: M9S8TsR7z7SG6Y
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: 9200
     ports:
       - "3000:3000"
     links:
       - mysql
+      - elasticsearch
     volumes:
       - ${PWD}:/opt/coding-challenge-api
     command: /bin/bash -c "sleep 25; rake db:drop db:create db:migrate && rails server -b 0.0.0.0"
@@ -27,3 +30,11 @@ services:
       MYSQL_DATABASE: coding-challenge-api
       MYSQL_ROOT_PASSWORD: M9S8TsR7z7SG6Y
     command: "--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci "
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: 9200
