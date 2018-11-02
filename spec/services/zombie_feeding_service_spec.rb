@@ -4,7 +4,7 @@ describe ZombieFeedingService do
   subject { ZombieFeedingService.new }
 
   let!(:person) { create(:person) }
-  let!(:hungry_zombie) { create(:zombie) }
+  let!(:hungry_zombie) { create(:zombie, hungry: true) }
 
   context 'when the service is called' do
     it 'deletes a person' do
@@ -23,6 +23,18 @@ describe ZombieFeedingService do
       expect { subject.call(person, hungry_zombie) }
         .to change(hungry_zombie, :brains_eaten)
         .by(1)
+    end
+
+    it 'changes hungry attr to false' do
+      expect { subject.call(person, hungry_zombie) }
+        .to change(hungry_zombie, :hungry)
+        .from(true)
+        .to(false)
+    end
+
+    it 'updates last_eaten' do
+      expect { subject.call(person, hungry_zombie) }
+        .to change(hungry_zombie, :last_ate)
     end
   end
 end
