@@ -12,7 +12,8 @@ RSpec.describe Zombie, type: :model do
     build(:zombie,
           hit_points: hit_points,
           brains_eaten: brains_eaten,
-          speed: speed)
+          speed: speed,
+          name: Faker::HarryPotter.unique.character)
   end
 
   context 'validations tests' do
@@ -77,10 +78,38 @@ RSpec.describe Zombie, type: :model do
              zombie_id: zombie.id)
     end
 
-    it { should have_many(:weapons) }
-
     it 'returns the zombies weapon' do
       expect(zombie.weapons.first.name).to eq('Shotgun')
+    end
+  end
+
+  describe 'search tests', elasticsearch: true do
+    let(:non_zombie_name) { 'Wilfred' }
+
+    context 'when searching for existing zombie' do
+      let!(:second_zombie) do
+        create(:zombie,
+               name: Faker::HarryPotter.unique.character)
+      end
+
+      it 'returns correct zombie' do
+        Zombie.__elasticsearch__.refresh_index!
+
+        expect(Zombie.search(second_zombie.name)
+          .records
+          .records
+          .first
+          .name).to eq(second_zombie.name)
+      end
+    end
+
+    context 'when searching non existing zombie' do
+      it 'returns nil' do
+        expect(Zombie.search(non_zombie_name)
+          .records
+          .records
+          .first).to eq(nil)
+      end
     end
   end
 end
