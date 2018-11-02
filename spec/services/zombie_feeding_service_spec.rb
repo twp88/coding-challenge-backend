@@ -18,5 +18,11 @@ describe ZombieFeedingService do
         .to change(hungry_zombie, :hit_points)
         .by(person.hp)
     end
+
+    it 'increases zombie brains eaten' do
+      expect { subject.call(person, hungry_zombie) }
+        .to change(hungry_zombie, :brains_eaten)
+        .by(1)
+    end
   end
 end
