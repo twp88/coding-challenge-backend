@@ -31,5 +31,10 @@ describe ZombieFeedingService do
         .from(true)
         .to(false)
     end
+
+    it 'updates last_eaten' do
+      expect { subject.call(person, hungry_zombie) }
+        .to change(hungry_zombie, :last_ate)
+    end
   end
 end
