@@ -6,6 +6,7 @@ class SearchController < ApplicationController
       @zombies = Zombie.search params[:q]
     end
 
+    ParseZombieSearchResultsService.call(@zombies) unless @zombies.empty?
     render json: @zombies
   end
 end
