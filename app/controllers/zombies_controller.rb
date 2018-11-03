@@ -31,6 +31,16 @@ class ZombiesController < ApplicationController
     Zombie.find(params[:id]).destroy
   end
 
+  def add_weapon
+    result = AddZombieWeaponService.new(params[:id], params[:weapon_name]).call
+    render json: result
+  end
+
+  def delete_weapon
+    DeleteZombieWeaponService.new(params[:id], params[:weapon_name]).call
+    render json: 'Weapon deleted'
+  end
+
   private
 
   def zombie_params

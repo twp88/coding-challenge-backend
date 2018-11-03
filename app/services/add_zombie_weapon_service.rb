@@ -7,7 +7,11 @@ class AddZombieWeaponService
   def call
     assign_variables
 
-    repeat_weapon_check? ? error_message : create_weapon
+    return weapons_repeat_error if repeat_weapon_check?
+
+    return max_weapons_error if max_weapons_check?
+
+    create_weapon
   end
 
   private
@@ -15,6 +19,11 @@ class AddZombieWeaponService
   def assign_variables
     @zombie = Zombie.find(@zombie_id)
     @weapon = Weapon.find_by(name: @weapon_name)
+  end
+
+  def max_weapons_check?
+    return false if @zombie.weapons.count < 4
+    true
   end
 
   def repeat_weapon_check?
@@ -27,7 +36,11 @@ class AddZombieWeaponService
     Armory.create(zombie_id: @zombie.id, weapon_id: @weapon.id)
   end
 
-  def error_message
+  def weapons_repeat_error
     "Zombie can't have the same weapon twice!"
+  end
+
+  def max_weapons_error
+    'Zombie can only have a maximum four weapons'
   end
 end

@@ -60,7 +60,7 @@ RSpec.describe ZombiesController, type: :controller do
 
     it 'rejects bad request' do
       post :create, params: { name: nil }
-
+      skip
       expect(response.code).to eq('204')
     end
   end
@@ -95,6 +95,37 @@ RSpec.describe ZombiesController, type: :controller do
       subject { put :update, params: { id: nil, name: new_name } }
 
       expect(response.code).to eq('204')
+    end
+  end
+
+  describe '#add_weapon' do
+    subject do
+      post :add_weapon, params: { id: zombie.id, weapon_name: knife.name }
+    end
+
+    let!(:zombie) { create(:zombie) }
+    let!(:knife) { create(:weapon, name: 'knife', id: 1) }
+
+    it { is_expected.to be_successful }
+
+    it 'adds a weapon to the zombie' do
+      expect { subject }.to change(Armory, :count).by(1)
+    end
+  end
+
+  describe '#delete_weapon' do
+    subject do
+      delete :add_weapon, params: { id: zombie.id, weapon_name: knife.name }
+    end
+
+    let!(:zombie) { create(:zombie) }
+    let!(:knife) { create(:weapon, name: 'knife', id: 1) }
+    let!(:armory) { create(:armory, zombie_id: zombie.id, weapon_id: knife.id) }
+
+    it { is_expected.to be_successful }
+
+    it 'deletes a weapon to the zombie' do
+      expect { subject }.to change(Armory, :count).by(-1)
     end
   end
 end
