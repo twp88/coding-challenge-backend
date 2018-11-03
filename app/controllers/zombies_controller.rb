@@ -46,6 +46,11 @@ class ZombiesController < ApplicationController
     render json: result
   end
 
+  def delete_armor
+    DeleteZombieArmorService.new(params[:id], params[:armor_name]).call
+    render json: 'Armor deleted'
+  end
+
   private
 
   def zombie_params
