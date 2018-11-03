@@ -115,7 +115,7 @@ RSpec.describe ZombiesController, type: :controller do
 
   describe '#delete_weapon' do
     subject do
-      delete :add_weapon, params: { id: zombie.id, weapon_name: knife.name }
+      delete :delete_weapon, params: { id: zombie.id, weapon_name: knife.name }
     end
 
     let!(:zombie) { create(:zombie) }
@@ -126,6 +126,42 @@ RSpec.describe ZombiesController, type: :controller do
 
     it 'deletes a weapon to the zombie' do
       expect { subject }.to change(Armory, :count).by(-1)
+    end
+  end
+
+  describe '#add_weapon' do
+    subject do
+      post :add_armor, params: { id: zombie.id, armor_name: shield.name }
+    end
+
+    let!(:zombie) { create(:zombie) }
+    let!(:shield) { create(:armor, name: 'shield', id: 1) }
+
+    it { is_expected.to be_successful }
+
+    it 'adds a weapon to the zombie' do
+      expect { subject }.to change(Wardrobe, :count).by(1)
+    end
+  end
+
+  describe '#delete_armor' do
+    subject do
+      delete :delete_armor, params: { id: zombie.id, armor_name: shield.name }
+    end
+
+    let!(:zombie) { create(:zombie) }
+    let!(:shield) { create(:armor, name: 'shield', id: 1) }
+
+    let!(:wardrobe) do
+      create(:wardrobe,
+             zombie_id: zombie.id,
+             armor_id: shield.id)
+    end
+
+    it { is_expected.to be_successful }
+
+    it 'deletes armor of the zombie' do
+      expect { subject }.to change(Wardrobe, :count).by(-1)
     end
   end
 end
