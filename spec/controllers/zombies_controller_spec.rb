@@ -128,4 +128,19 @@ RSpec.describe ZombiesController, type: :controller do
       expect { subject }.to change(Armory, :count).by(-1)
     end
   end
+
+  describe '#add_weapon' do
+    subject do
+      post :add_armor, params: { id: zombie.id, armor_name: shield.name }
+    end
+
+    let!(:zombie) { create(:zombie) }
+    let!(:shield) { create(:armor, name: 'shield', id: 1) }
+
+    it { is_expected.to be_successful }
+
+    it 'adds a weapon to the zombie' do
+      expect { subject }.to change(Wardrobe, :count).by(1)
+    end
+  end
 end
