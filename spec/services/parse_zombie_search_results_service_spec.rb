@@ -2,11 +2,17 @@ require 'rails_helper'
 
 RSpec.describe ParseZombieSearchResultsService do
   describe 'ParseZombieSearchResultsService' do
-    subject { ParseZombieSearchResultsService.new(zombies) }
+    subject { ParseZombieSearchResultsService.new([zombie]) }
 
     let(:zombie) { create(:zombie) }
     let(:shield) { create(:armor) }
     let(:weapon) { create(:weapon) }
+
+    let(:desired_result) do
+      "Zombie #{zombie.name}: #{zombie},
+       Zombie weapons: #{zombie.weapons},
+       Zombie armor: #{zombie.armors} ||"
+    end
 
     let!(:armory) do
       create(:armory,
@@ -22,7 +28,7 @@ RSpec.describe ParseZombieSearchResultsService do
 
     context 'when called' do
       it 'returns correctly parsed results' do
-        debugger
+        expect(subject.call).to eq(desired_result)
       end
     end
   end

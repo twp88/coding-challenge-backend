@@ -1,0 +1,3 @@
+class ParseZombieSearchResultsService
+
+end
