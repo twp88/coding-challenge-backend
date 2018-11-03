@@ -115,7 +115,7 @@ RSpec.describe ZombiesController, type: :controller do
 
   describe '#delete_weapon' do
     subject do
-      delete :add_weapon, params: { id: zombie.id, weapon_name: knife.name }
+      delete :delete_weapon, params: { id: zombie.id, weapon_name: knife.name }
     end
 
     let!(:zombie) { create(:zombie) }
