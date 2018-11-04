@@ -27,7 +27,7 @@ The following are the correct requests that can be made for your project. We rec
 * To list all zombies;
 `curl https://zombie-code-challenge.herokuapp.com/zombies/?access_token=<insert_access_token>`
 
-* To list specific zombie; `https://zombie-code-challenge.herokuapp.com/zombies/<zombie_id>/?access_token=<insert_access_token>
+* To list specific zombie; `https://zombie-code-challenge.herokuapp.com/zombies/<zombie_id>/?access_token=<insert_access_token>`
 
 * To create a zombie;
 `curl -X POST --data '<attr=value>&<attr2=value2>&access_token=<insert_access_token>' https://zombie-code-challenge.herokuapp.com/zombies`
