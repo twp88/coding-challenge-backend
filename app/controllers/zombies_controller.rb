@@ -24,7 +24,7 @@ class ZombiesController < ApplicationController
     render json: "#{@zombie.name} has been successfully spawned"
   end
 
-  def update
+  def update_zombie
     @zombie = Zombie.find(params[:id])
     @zombie.update_attributes(zombie_params)
   end
@@ -71,6 +71,5 @@ class ZombiesController < ApplicationController
   def zombie_missing_error
     logger.error "Woops! This zombie doesn't exist!"
     render file: "#{Rails.root}/public/404.html", status: 404
-    render json: "Woops! This zombie doesn't exist!"
   end
 end
