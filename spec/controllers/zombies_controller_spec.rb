@@ -129,7 +129,7 @@ RSpec.describe ZombiesController, type: :controller do
     end
   end
 
-  describe '#add_weapon' do
+  describe '#add_armor' do
     subject do
       post :add_armor, params: { id: zombie.id, armor_name: shield.name }
     end
