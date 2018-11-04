@@ -4,7 +4,6 @@ class ParseZombieSearchResultsService
   end
 
   def call
-    puts combine_all_details
     combine_all_details
   end
 

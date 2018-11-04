@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  before_action :restrict_access
+
   def search
     if params[:q].nil?
       @zombies = []
@@ -6,7 +8,13 @@ class SearchController < ApplicationController
       @zombies = Zombie.search params[:q]
     end
 
-    @results = ParseZombieSearchResultsService.new(@zombies).call unless @zombies.empty?
+    parse_results unless @zombies.empty?
     render json: @results
+  end
+
+  private
+
+  def parse_results
+    @results = ParseZombieSearchResultsService.new(@zombies).call
   end
 end

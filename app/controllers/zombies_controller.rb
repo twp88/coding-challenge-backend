@@ -3,6 +3,8 @@ class ZombiesController < ApplicationController
     zombie_missing_error
   end
 
+  before_action :restrict_access
+
   def index
     @zombies = Zombie.all
     render json: @zombies
@@ -27,7 +29,7 @@ class ZombiesController < ApplicationController
     @zombie.update_attributes(zombie_params)
   end
 
-  def destroy
+  def delete_zombie
     Zombie.find(params[:id]).destroy
   end
 
@@ -69,5 +71,6 @@ class ZombiesController < ApplicationController
   def zombie_missing_error
     logger.error "Woops! This zombie doesn't exist!"
     render file: "#{Rails.root}/public/404.html", status: 404
+    render json: "Woops! This zombie doesn't exist!"
   end
 end
