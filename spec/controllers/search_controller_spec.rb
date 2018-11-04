@@ -4,7 +4,7 @@ RSpec.describe SearchController, type: :controller, elasticsearch: true do
   let!(:zombie) { Zombie.create(name: Faker::HarryPotter.unique.character) }
 
   let(:response_name) do
-    "[\"Zombie #{zombie.name}:\\n       Zombie id: #{zombie.id}"
+    "[[\"Zombie #{zombie.name}:\\n       Zombie id: #{zombie.id}"
   end
 
   describe '#search' do

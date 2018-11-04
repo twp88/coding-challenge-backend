@@ -3,18 +3,18 @@ class SearchController < ApplicationController
 
   def search
     if params[:q].nil?
-      @zombies = []
+      @results = []
     else
-      @zombies = Zombie.search params[:q]
+      @results = []
+      @zombies = ParseZombieSearchResultsService.new(Zombie.search params[:q])
+                                                .call
+
+      @weapons = Weapon.search params[:q]
+      @armors = Armor.search params[:q]
+
+      @results << @zombies << @armors << @weapons
     end
 
-    parse_results unless @zombies.empty?
     render json: @results
-  end
-
-  private
-
-  def parse_results
-    @results = ParseZombieSearchResultsService.new(@zombies).call
   end
 end
