@@ -8,8 +8,6 @@ class SearchController < ApplicationController
       @results = []
       @zombies = ParseZombieSearchResultsService.new(Zombie.search params[:q])
                                                 .call
-
-      @weapons = Weapon.search params[:q]
       @armors = Armor.search params[:q]
 
       @results << @zombies << @armors << @weapons
