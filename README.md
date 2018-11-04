@@ -1,53 +1,90 @@
-[ ![Codeship Status for twp88/coding-challenge-backend](https://app.codeship.com/projects/76a076b0-b9cd-0136-1477-5a7589b245e6/status?branch=master)](https://app.codeship.com/projects/312316)
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/twp88/coding-challenge-backend.svg?columns=all)](https://waffle.io/twp88/coding-challenge-backend)
 
 # Badi Coding Challenge - Backend (Ruby on Rails)
 ![Zombies at Badi](https://user-images.githubusercontent.com/4199523/33260366-e54216aa-d35f-11e7-8442-8d9e1cd67d88.jpg)
 
 ## The context
-You are a scientist in a post-apocalyptic world. In your lab you have plenty of human tissues, yet not so many brains. For this reason, you decide to create zombies, which you then equip with armors and weapons. Why would you do that? Well, we cannot tell you. The only thing you need to know is that you are a crazy scientist playing on the edge of life and death.
+Welcome Doctor to the api laboratory of Zombie Corp! The world leaders in providing remote zombie api solutions.
 
-## Instructions
+## Explanation
 
-* Fork this repo and clone your fork in your local machine. Alternatively, if you prefer to keep your challenge private, just download the code of this repo and send the final result to jobs@badiapp.com.
-* The challenge is on! Implement the 6 steps described below;
-* Create a pull request.
+Once you have been afforded an access token, our unique laboratory will enable you to spawn and unspawn the undead at a moments notice. Furthermore you will be able to browse the catalogue and furnish your new Zombie kin with weapons and armor from our unique collection.
 
-## What we expect
-* Build a performant, clean and well structured solution;
-* Commit **early and often**. We want to be able to check your progress;
-* Feel free to address the problem creatively according to your programming tastes (there are always multiple ways to achieve the same goal) and try to use elegant solutions.
+## Further project ideas
 
-## The Challenge
+Here at Zombie Corp, we are aware of your unique world domination needs. This is why we are working towards a more deadly future by planning to incorporate such unique ideas as a human feeding tank, town invasion and automatic zombie feeding dispensaries which detect when your precious ones are hungry.
 
-Create a fully-working API that allows to perform the following operations:
+## How to use
 
-1. Create Zombies. Each zombie can have weapons and armors;
-2. Update a Zombie's attributes, including (but not limited to) weapons and armors;
-4. Search Zombies according to their attributes, weapons and armors;
-3. Destroy a Zombie;
-5. Make your API public. Deploy it using the service of your choice (e.g. AWS, Heroku, Digital Ocean...);
-6. Create a Readme file including a short explanation of your technical choices and (if you wish) ideas and suggestions.
+To use our service, simply follow the instructions below.
 
-Too easy? Great, we think so too!
-That's why we encourage candidates to go the extra mile and impress us in any way they deem appropriate (as long as it is related to this challenge ;).
+To use all of the functions of your Api please use curl.
+Please note that your token api is as follows; 6040ece072888247222026399db59165
+Do not lose it!
 
-**Happy coding!**
+The following are the correct requests that can be made for your project. We recommend using curl.
 
-### Recommendations
-We **highly recommend you to use Docker**, this project is already setup to do so.
-Just run `docker-compose up -d && docker-compose logs -f` and your api will be up & running with hot code reloading on `http://localhost:3000`.
+* To list all zombies;
+curl https://zombie-code-challenge.herokuapp.com/zombies/?access_token=<insert_access_token>
 
-In case you want to clean your environment, run again:
+* To list specific zombie; https://zombie-code-challenge.herokuapp.com/zombies/<zombie_id>/?access_token=<insert_access_token>
 
-```
-docker-compose down -f
-docker-compose up -d --build
-docker-compose logs -f
-```
+* To create a zombie;
+curl -X POST --data '<attr=value>&<attr2=value2>&access_token=<insert_access_token>' https://zombie-code-challenge.herokuapp.com
 
-### About Badi
-[Badi](https://www.crunchbase.com/organization/badi) is a startup based in Barcelona (Spain) which offers a two-sided marketplace for shared flats and roommates (mobile and web app).
-Our goal is making city living affordable for everyone by unlocking available rooms inside crowded urban areas. How? By offering the best marketplace that intelligently matches verified profiles without intermediaries.
-Do you want to join our tech team as a backend engineer? Accept our challenge and impress us :)
-In case of questions or doubts, don't hesitate to reach out to us at jobs@badiapp.com.
+Please note that when creating a zombie, as a minimum you must provide a name for that zombie. If you do not
+wish to concern yourself with the other attributes, our service will spawn this zombie with our default settings.
+
+* To update a specific zombie;
+curl -X PUT --data 'id=<zombie_id>&<attr=new_value>&access_token=<insert_access_token>' https://zombie-code-challenge.herokuapp.com/update_zombie/
+
+* To delete a zombie (sad times);
+curl -X DELETE --data 'id=<zombie_id>&access_token=<insert_access_token>' https://zombie-code-challenge.herokuapp.com/delete_zombie/
+
+* To search;
+curl https://zombie-code-challenge.herokuapp.com/search/?q=<'search_terms'>&access_token=<insert_access_token>
+
+### Armory
+Within our armory we have five different weapons to choose from. Be aware that zombies can only carry up to
+four weapons at a time, and can never carry more than one of the same weapon. Our weapons;
+  * Shotgun
+  * Knife
+  * Grenade
+  * Chainsaw
+  * Indiana Jones Whip
+
+ * To add a zombie weapon to a zombie;
+ curl --data "id=<zombie_id>&weapon_name=<weapon_name>" https://zombie-code-challenge.herokuapp.com/add_zombie_weapon
+
+ * To remove a zombie weapon;
+ curl -X DELETE -d "id=<zombie_id>&weapon_name=<weapon_name>" https://zombie-code-challenge.herokuapp.com/delete_zombie_weapon
+
+ ### Wardrobe
+Our wardrobe contains a range of protective armor for the discerning zombie to model. As with our weapons, a zombie
+may only wear up to four items and never the same item more than once.
+  * Shield
+  * Helmet
+  * Torso Armor
+  * Leg Armor
+
+* To add zombie armor;
+curl --data "id=<zombie_id>&armor_name=<armor_name>” https://zombie-code-challenge.herokuapp.com/add_zombie_armor
+
+* To remove zombie armor;
+curl -X DELETE -d 'id=<zombie_id>&armor_name=<armor_name’
+https://zombie-code-challenge.herokuapp.com/delete_zombie_armor
+
+## Further comments
+I had great fun making this project! I felt a little frustrated that I ran out time to completely implement all of my ideas. I'm also aware that this project is by no means perfect. There are a couple of issues that had I had more time, I would have addressed. They are as follows;
+
+  * Refactoring the ParseZombieSearchResultsService. This service needs a great deal of refactoring, as does it's test (note that the test is skipped).
+
+  * Improve the search feature. I used elasticsearch for this project, and it was the first time that i had used it with docker. This meant that it took a lot longer that I had originally expected for the feature to be implemented, and there are still some parts of the search that I would like to improve.
+
+  * Improve the test coverage.
+
+### Ideas for the future
+As mentioned, there were ideas that I would have like to have implemented. I had been working on the idea of adding people and towns, which would serve as a source of food for the zombies once their hunger increased (which would depend on the last time that had eaten).
+To do this I was going to implement a cron job which would run a service, potentially using sidekiq to make the zombie hungrier for each day that passed.
+
+Please feel free to ask me questions relating to my technical decisions.

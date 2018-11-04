@@ -80,8 +80,8 @@ RSpec.describe ZombiesController, type: :controller do
     end
   end
 
-  describe '#update' do
-    subject { put :update, params: { id: first_zombie.id, name: new_name } }
+  describe '#update_zombie' do
+    subject { put :update_zombie, params: { id: first_zombie.id, name: new_name } }
 
     it { is_expected.to be_successful }
 
