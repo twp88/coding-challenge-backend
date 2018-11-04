@@ -25,24 +25,24 @@ Do not lose it!
 The following are the correct requests that can be made for your project. We recommend using curl.
 
 * To list all zombies;
-curl https://zombie-code-challenge.herokuapp.com/zombies/?access_token=<insert_access_token>
+`curl https://zombie-code-challenge.herokuapp.com/zombies/?access_token=<insert_access_token>`
 
-* To list specific zombie; https://zombie-code-challenge.herokuapp.com/zombies/<zombie_id>/?access_token=<insert_access_token>
+* To list specific zombie; `https://zombie-code-challenge.herokuapp.com/zombies/<zombie_id>/?access_token=<insert_access_token>
 
 * To create a zombie;
-curl -X POST --data '<attr=value>&<attr2=value2>&access_token=<insert_access_token>' https://zombie-code-challenge.herokuapp.com
+`curl -X POST --data '<attr=value>&<attr2=value2>&access_token=<insert_access_token>' https://zombie-code-challenge.herokuapp.com`
 
 Please note that when creating a zombie, as a minimum you must provide a name for that zombie. If you do not
 wish to concern yourself with the other attributes, our service will spawn this zombie with our default settings.
 
 * To update a specific zombie;
-curl -X PUT --data 'id=<zombie_id>&<attr=new_value>&access_token=<insert_access_token>' https://zombie-code-challenge.herokuapp.com/update_zombie/
+`curl -X PUT --data 'id=<zombie_id>&<attr=new_value>&access_token=<insert_access_token>' https://zombie-code-challenge.herokuapp.com/update_zombie/`
 
 * To delete a zombie (sad times);
-curl -X DELETE --data 'id=<zombie_id>&access_token=<insert_access_token>' https://zombie-code-challenge.herokuapp.com/delete_zombie/
+`curl -X DELETE --data 'id=<zombie_id>&access_token=<insert_access_token>' https://zombie-code-challenge.herokuapp.com/delete_zombie/`
 
 * To search;
-curl https://zombie-code-challenge.herokuapp.com/search/?q=<'search_terms'>&access_token=<insert_access_token>
+`curl https://zombie-code-challenge.herokuapp.com/search/?q=<'search_terms'>&access_token=<insert_access_token>`
 
 ### Armory
 Within our armory we have five different weapons to choose from. Be aware that zombies can only carry up to
@@ -54,13 +54,13 @@ four weapons at a time, and can never carry more than one of the same weapon. Ou
   * Indiana Jones Whip
 
  * To add a zombie weapon to a zombie;
- curl --data "id=<zombie_id>&weapon_name=<weapon_name>" https://zombie-code-challenge.herokuapp.com/add_zombie_weapon
+ `curl --data "id=<zombie_id>&weapon_name=<weapon_name>" https://zombie-code-challenge.herokuapp.com/add_zombie_weapon`
 
  * To remove a zombie weapon;
- curl -X DELETE -d "id=<zombie_id>&weapon_name=<weapon_name>" https://zombie-code-challenge.herokuapp.com/delete_zombie_weapon
+ `curl -X DELETE -d "id=<zombie_id>&weapon_name=<weapon_name>" https://zombie-code-challenge.herokuapp.com/delete_zombie_weapon`
 
  * To see a list of all weapons;
- curl https://zombie-code-challenge.herokuapp.com/weapons/?access_token=<insert_access_token>
+ `curl https://zombie-code-challenge.herokuapp.com/weapons/?access_token=<insert_access_token>`
 
  ### Wardrobe
 Our wardrobe contains a range of protective armor for the discerning zombie to model. As with our weapons, a zombie
@@ -71,11 +71,11 @@ may only wear up to four items and never the same item more than once.
   * Leg Armor
 
 * To add zombie armor;
-curl --data "id=<zombie_id>&armor_name=<armor_name>” https://zombie-code-challenge.herokuapp.com/add_zombie_armor
+`curl --data "id=<zombie_id>&armor_name=<armor_name>” https://zombie-code-challenge.herokuapp.com/add_zombie_armor`
 
 * To remove zombie armor;
-curl -X DELETE -d 'id=<zombie_id>&armor_name=<armor_name’
-https://zombie-code-challenge.herokuapp.com/delete_zombie_armor
+`curl -X DELETE -d 'id=<zombie_id>&armor_name=<armor_name’
+https://zombie-code-challenge.herokuapp.com/delete_zombie_armor`
 
 ## Further comments
 I had great fun making this project! I felt a little frustrated that I ran out time to completely implement all of my ideas. I'm also aware that this project is by no means perfect. There are a couple of issues that had I had more time, I would have addressed. They are as follows;
@@ -89,6 +89,9 @@ I had great fun making this project! I felt a little frustrated that I ran out t
   * Please be aware that the weapons are not searchable. This is because of the limits placed on the number of    indicies that could be hosted on heroku (2, currently used by zombies and armor). Instead, I have made the index action in the weapon controller available.
 
   * When searching for a zombie, all of the associated weapons and armor are listed with each result.
+
+### Using the project locally
+As requested, I have used docker for this project. Use  `docker-compose up -d && docker-compose logs -f` to run it. The indicies for elasticsearch will then be needed to be set up. From the rails console, run `ModelName.__elasticsearch__.create_index! force: true` for each model (zombie and armor). Following this you should then run `ModelName.import`. 
 
 ### Ideas for the future
 As mentioned, there were ideas that I would have like to have implemented. I had been working on the idea of adding people and towns, which would serve as a source of food for the zombies once their hunger increased (which would depend on the last time that had eaten).
