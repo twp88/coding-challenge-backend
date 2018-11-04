@@ -6,4 +6,4 @@ class Weapon < ApplicationRecord
   has_many :zombies, through: :armories
 end
 
-Weapon.import
+# Weapon.import

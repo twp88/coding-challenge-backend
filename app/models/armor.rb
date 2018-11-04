@@ -6,4 +6,4 @@ class Armor < ApplicationRecord
   has_many :zombies, through: :wardrobes
 end
 
-Armor.import
+# Armor.import
