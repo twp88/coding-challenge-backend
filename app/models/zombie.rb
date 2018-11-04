@@ -20,4 +20,4 @@ class Zombie < ApplicationRecord
   end
 end
 
-# Zombie.import
+Zombie.import

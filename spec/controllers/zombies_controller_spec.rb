@@ -65,8 +65,8 @@ RSpec.describe ZombiesController, type: :controller do
     end
   end
 
-  describe '#delete' do
-    subject { delete :destroy, params: { id: first_zombie.id } }
+  describe '#delete_zombie' do
+    subject { delete :delete_zombie, params: { id: first_zombie.id } }
 
     it { is_expected.to be_successful }
 

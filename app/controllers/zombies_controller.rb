@@ -29,7 +29,7 @@ class ZombiesController < ApplicationController
     @zombie.update_attributes(zombie_params)
   end
 
-  def destroy
+  def delete_zombie
     Zombie.find(params[:id]).destroy
   end
 
