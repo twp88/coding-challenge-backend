@@ -59,6 +59,9 @@ four weapons at a time, and can never carry more than one of the same weapon. Ou
  * To remove a zombie weapon;
  curl -X DELETE -d "id=<zombie_id>&weapon_name=<weapon_name>" https://zombie-code-challenge.herokuapp.com/delete_zombie_weapon
 
+ * To see a list of all weapons;
+ curl https://zombie-code-challenge.herokuapp.com/weapons/?access_token=<insert_access_token>
+
  ### Wardrobe
 Our wardrobe contains a range of protective armor for the discerning zombie to model. As with our weapons, a zombie
 may only wear up to four items and never the same item more than once.
@@ -82,6 +85,10 @@ I had great fun making this project! I felt a little frustrated that I ran out t
   * Improve the search feature. I used elasticsearch for this project, and it was the first time that i had used it with docker. This meant that it took a lot longer that I had originally expected for the feature to be implemented, and there are still some parts of the search that I would like to improve.
 
   * Improve the test coverage.
+
+  * Please be aware that the weapons are not searchable. This is because of the limits placed on the number of    indicies that could be hosted on heroku (2, currently used by zombies and armor). Instead, I have made the index action in the weapon controller available.
+
+  * When searching for a zombie, all of the associated weapons and armor are listed with each result.
 
 ### Ideas for the future
 As mentioned, there were ideas that I would have like to have implemented. I had been working on the idea of adding people and towns, which would serve as a source of food for the zombies once their hunger increased (which would depend on the last time that had eaten).
